@@ -17,7 +17,7 @@ wk.add({
 	{ '<leader><leader>', ":Pick files<CR>",               desc = "Pick dir", },
 	{ '<leader>h',        ":Pick help<CR>",                desc = "Pick Help", },
 	{ "<leader>q",        "<cmd>q!<cr>",                   desc = "force quit" }, -- no need to specify mode since it's inherited
-	{ "qq",               "<cmd>q<cr>",                    desc = "fast quit" },
+	{ "qq",               "<cmd>q!<cr>",                    desc = "fast quit" },
 	{ "<leader>w",        "<cmd>w<cr>",                    desc = "Write" },
 	{ '<leader>lf',       vim.lsp.buf.format,              desc = "format file with lsp" },
 	{ '<S-y>',            '"+y<CR>',                       desc = "yank to clipboard" },
