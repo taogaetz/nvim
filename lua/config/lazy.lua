@@ -35,5 +35,5 @@ require("lazy").setup({
   checker = { enabled = true },
 })
 
-require "mini.pick".setup()
+require("mini.pick").setup()
 require("oil").setup()

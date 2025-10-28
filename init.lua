@@ -11,16 +11,17 @@ vim.o.winborder = "rounded"
 
 wk.add({
 	mode = { "n", "v", "x" },
-	{ '<leader>o',  ':update<CR> :source<CR>', desc = "write & source" },
-	{ '<leader>L',  ':Lazy<CR>',               desc = "open Lazy" },
-	{ '<leader>p',  ":Pick files<CR>",         desc = "Pick Files", },
-	{ '<leader>h',  ":Pick help<CR>",          desc = "Pick Help", },
-	{ "<leader>q",  "<cmd>q<cr>",              desc = "Quit" }, -- no need to specify mode since it's inherited
-	{ "qq",         "<cmd>q<cr>",              desc = "fast quit" },
-	{ "<leader>w",  "<cmd>w<cr>",              desc = "Write" },
-	{ '<leader>lf', vim.lsp.buf.format,        desc = "format file with lsp" },
-	{ '<leader>y',  '"+y<cr>',                 desc = "yank to clipboard" },
-	{ '<leader>d',  '"+d<CR>',                 desc = "cut to clipboard" },
+	{ '<leader>o',        ':update<CR> :source<CR>',       desc = "write & source" },
+	{ '<leader>L',        ':Lazy<CR>',                     desc = "open Lazy" },
+	{ '<leader>p',        ":Pick grep_live tool='rg'<CR>", desc = "Pick grep", },
+	{ '<leader><leader>', ":Pick files<CR>",               desc = "Pick dir", },
+	{ '<leader>h',        ":Pick help<CR>",                desc = "Pick Help", },
+	{ "<leader>q",        "<cmd>q!<cr>",                   desc = "force quit" }, -- no need to specify mode since it's inherited
+	{ "qq",               "<cmd>q<cr>",                    desc = "fast quit" },
+	{ "<leader>w",        "<cmd>w<cr>",                    desc = "Write" },
+	{ '<leader>lf',       vim.lsp.buf.format,              desc = "format file with lsp" },
+	{ '<S-y>',            '"+y<CR>',                       desc = "yank to clipboard" },
+	{ '<leader>x',        '"+d<CR>',                       desc = "cut to clipboard" },
 })
 
 
