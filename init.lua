@@ -17,15 +17,34 @@ wk.add({
 	{ '<leader><leader>', ":Pick files<CR>",               desc = "Pick dir", },
 	{ '<leader>h',        ":Pick help<CR>",                desc = "Pick Help", },
 	{ "<leader>q",        "<cmd>q!<cr>",                   desc = "force quit" }, -- no need to specify mode since it's inherited
-	{ "qq",               "<cmd>q!<cr>",                    desc = "fast quit" },
+	{ "qq",               "<cmd>q!<cr>",                   desc = "fast quit" },
 	{ "<leader>w",        "<cmd>w<cr>",                    desc = "Write" },
 	{ '<leader>lf',       vim.lsp.buf.format,              desc = "format file with lsp" },
-	{ '<S-y>',            '"+y<CR>',                       desc = "yank to clipboard" },
+	{ '<leader>y',            '"+y<CR>',                       desc = "yank to clipboard" },
 	{ '<leader>x',        '"+d<CR>',                       desc = "cut to clipboard" },
 })
 
 
-vim.lsp.enable({ 'lua_ls' })
+vim.lsp.enable({ 'lua_ls', 'svelte' })
+
 
 vim.cmd("colorscheme vague")
 vim.cmd(":hi statusline guibg=NONE")
+
+
+require('nvim-ts-autotag').setup({
+  opts = {
+    -- Defaults
+    enable_close = true, -- Auto close tags
+    enable_rename = true, -- Auto rename pairs of tags
+    enable_close_on_slash = false -- Auto close on trailing </
+  },
+  -- Also override individual filetype configs, these take priority.
+  -- Empty by default, useful if one of the "opts" global settings
+  -- doesn't work well in a specific filetype
+  per_filetype = {
+    ["html"] = {
+      enable_close = false
+    }
+  }
+})
