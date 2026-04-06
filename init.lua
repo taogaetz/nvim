@@ -1,3 +1,4 @@
+-- init.lua reload test
 require("config.lazy")
 local wk = require("which-key")
 
@@ -8,6 +9,46 @@ vim.o.wrap = false
 vim.o.tabstop = 4
 vim.o.swapfile = false
 vim.o.winborder = "rounded"
+vim.opt.autoread = true
+
+local uv = vim.uv or vim.loop
+local reload_group = vim.api.nvim_create_augroup("AgentLiveReload", { clear = true })
+local live_reload_timer = uv.new_timer()
+
+local function checktime_now()
+	vim.cmd("silent! checktime")
+end
+
+vim.api.nvim_create_autocmd({
+	"FocusGained",
+	"BufEnter",
+	"CursorHold",
+	"CursorHoldI",
+	"TermLeave",
+	"WinEnter",
+}, {
+	group = reload_group,
+	pattern = "*",
+	callback = function()
+		-- Recheck the file on disk so external agent edits are loaded automatically.
+		checktime_now()
+	end,
+})
+
+live_reload_timer:start(0, 1000, vim.schedule_wrap(checktime_now))
+
+vim.api.nvim_create_autocmd("VimLeavePre", {
+	group = reload_group,
+	callback = function()
+		if live_reload_timer and not live_reload_timer:is_closing() then
+			live_reload_timer:stop()
+			live_reload_timer:close()
+		end
+	end,
+})
+
+-- Faster response to external edits.
+vim.opt.updatetime = 500
 
 wk.add({
 	mode = { "n", "v", "x" },
