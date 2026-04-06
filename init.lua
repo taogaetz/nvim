@@ -25,7 +25,16 @@ wk.add({
 })
 
 
-vim.lsp.enable({ 'lua_ls', 'svelte' })
+vim.lsp.enable({ 'lua_ls', 'svelte', 'jsonls' })
+
+vim.lsp.config('jsonls', {
+  settings = {
+    json = {
+      schemas = require('schemastore').json.schemas(),
+      validate = { enable = true },
+    }
+  }
+})
 
 
 vim.cmd("colorscheme vague")
