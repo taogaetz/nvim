@@ -31,10 +31,12 @@ end
 local function register(path, label, on_change)
 	local uv = vim.uv or vim.loop
 	watched_dirs[label] = watched_dirs[label] or {}
+	local root = path
 	local refresh_tree
 
 	local function add_dir(dir)
-		if watched_dirs[label][dir] then
+		local label_dirs = watched_dirs[label]
+		if not label_dirs or label_dirs[dir] then
 			return
 		end
 
@@ -45,6 +47,10 @@ local function register(path, label, on_change)
 
 		local ok = watcher:start(dir, {}, vim.schedule_wrap(function(err, filename, events)
 			if err then
+				return
+			end
+
+			if not watched_dirs[label] then
 				return
 			end
 
@@ -62,7 +68,11 @@ local function register(path, label, on_change)
 	end
 
 	refresh_tree = function()
-		scan_dirs(path, add_dir)
+		if not watched_dirs[label] then
+			return
+		end
+
+		scan_dirs(root, add_dir)
 	end
 
 	refresh_tree()
