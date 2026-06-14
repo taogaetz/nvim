@@ -1,6 +1,4 @@
 return {
-	'nvim-mini/mini.pick',
-	--@module 'minipick'
+	"nvim-mini/mini.icons",
 	opts = {},
-	lazy = false,
 }

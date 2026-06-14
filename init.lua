@@ -13,9 +13,10 @@ wk.add({
 	mode = { "n", "v", "x" },
 	{ '<leader>o',        ':update<CR> :source<CR>',       desc = "write & source" },
 	{ '<leader>L',        ':Lazy<CR>',                     desc = "open Lazy" },
-	{ '<leader>p',        ":Pick grep_live tool='rg'<CR>", desc = "Pick grep", },
-	{ '<leader><leader>', ":Pick files<CR>",               desc = "Pick dir", },
-	{ '<leader>h',        ":Pick help<CR>",                desc = "Pick Help", },
+	{ '<leader>p',        ":FzfLua live_grep<CR>",         desc = "Pick grep", },
+	{ '<leader><leader>', ":FzfLua files<CR>",             desc = "Pick dir", },
+	{ '<leader>r',        ":FzfLua oldfiles<CR>",          desc = "Pick recent", },
+	{ '<leader>h',        ":FzfLua helptags<CR>",          desc = "Pick Help", },
 	{ "<leader>q",        "<cmd>q!<cr>",                   desc = "force quit" }, -- no need to specify mode since it's inherited
 	{ "qq",               "<cmd>q!<cr>",                   desc = "fast quit" },
 	{ "<leader>w",        "<cmd>w<cr>",                    desc = "Write" },
